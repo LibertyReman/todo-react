@@ -28,6 +28,18 @@ export const App = () => {
     setIncompleteTodos(newTodos);
   };
 
+  const onClickComplete = (index) => {
+    //alert();
+    const newIncompleteTodos = [...incompleteTodos];
+    //指定した配列のindexを1つ削除
+    newIncompleteTodos.splice(index, 1);
+
+    //完了配列を生成
+    const newCompleteTodos = [...completeTodos, incompleteTodos[index]];
+    setIncompleteTodos(newIncompleteTodos);
+    setCompleteTodos(newCompleteTodos);
+  };
+
   return (
     <>
       <div className="input-area">
@@ -46,7 +58,7 @@ export const App = () => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
-                <button>完了</button>
+                <button onClick={() => onClickComplete(index)}>完了</button>
                 {/* index引数を渡すためには() => で新しく関数を生成する記述に変更する */}
                 <button onClick={() => onClickDelete(index)}>削除</button>
               </div>
