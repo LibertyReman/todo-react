@@ -20,6 +20,14 @@ export const App = () => {
     setTodoText("");
   };
 
+  const onClickDelete = (index) => {
+    //alert(index);
+    const newTodos = [...incompleteTodos];
+    //指定した配列のindexを1つ削除
+    newTodos.splice(index, 1);
+    setIncompleteTodos(newTodos);
+  };
+
   return (
     <>
       <div className="input-area">
@@ -34,12 +42,13 @@ export const App = () => {
         <p className="title">未完了のTODO</p>
         <ul>
           {/* ループ処理 */}
-          {incompleteTodos.map((todo) => {
+          {incompleteTodos.map((todo, index) => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
                 <button>完了</button>
-                <button>削除</button>
+                {/* index引数を渡すためには() => で新しく関数を生成する記述に変更する */}
+                <button onClick={() => onClickDelete(index)}>削除</button>
               </div>
             );
           })}
